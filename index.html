@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CPM Registry</title>
+</head>
+<body style="background:#111;color:white;text-align:center;font-family:Arial;">
+
+<h1>CPM Registry</h1>
+
+<input id="idInput" placeholder="Enter ID / Card No">
+<button onclick="searchCard()">Search</button>
+
+<br><br>
+
+<img id="cardImage" style="max-width:90%;display:none;">
+
+<script>
+const players = {
+"CPM-P-001":"https://drive.google.com/uc?export=view&id=1pcicVf7g7BGuAA77hciAhsWUy0EdhnQO"
+};
+
+function searchCard(){
+let id=document.getElementById("idInput").value.trim();
+let img=document.getElementById("cardImage");
+
+if(players[id]){
+img.src=players[id];
+img.style.display="block";
+}else{
+alert("Player Not Found");
+}
+}
+</script>
+
+</body>
+</html>
