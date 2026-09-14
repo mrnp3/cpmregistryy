@@ -1,33 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CPM Registry</title>
+<style>
+body{
+background:#000;
+color:white;
+font-family:Arial,sans-serif;
+text-align:center;
+padding:20px;
+}
+input{
+padding:10px;
+font-size:18px;
+}
+button{
+padding:10px 20px;
+font-size:18px;
+}
+img{
+max-width:90%;
+margin-top:20px;
+display:none;
+border-radius:10px;
+}
+</style>
 </head>
-<body style="background:#111;color:white;text-align:center;font-family:Arial;">
+<body>
 
 <h1>CPM Registry</h1>
 
-<input id="idInput" placeholder="Enter ID / Card No">
+<input type="text" id="idInput" placeholder="Enter ID">
 <button onclick="searchCard()">Search</button>
 
 <br><br>
 
-<img id="cardImage" style="max-width:90%;display:none;">
+<img id="cardImage">
 
 <script>
 const players = {
-"CPM-P-001":"CPM-P-001.png.jpg"
-function searchCard(){
-let id=document.getElementById("idInput").value.trim();
-let img=document.getElementById("cardImage");
+  "CPM-P-001": "CPM-P-001.png.jpg"
+};
 
-if(players[id]){
-img.src=players[id];
-img.style.display="block";
-}else{
-alert("Player Not Found");
-}
+function searchCard() {
+  let id = document.getElementById("idInput").value.trim();
+  let img = document.getElementById("cardImage");
+
+  if (players[id]) {
+    img.src = players[id];
+    img.style.display = "block";
+  } else {
+    alert("Player Not Found");
+  }
 }
 </script>
 
