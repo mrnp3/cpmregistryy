@@ -2,31 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CPM Registry players</title>
+<title>CPM Registry Players</title>
 <style>
 body{
-background:#99765;
-color:white;
+background:#000;
+color:#fff;
 font-family:Arial;
 text-align:center;
 padding:20px;
 }
-h1{
-font-size:50px;
-}
-input{
+input,button{
 padding:10px;
-font-size:20px;
-}
-button{
-padding:10px;
-font-size:20px;
+font-size:18px;
 }
 img{
 max-width:90%;
 margin-top:20px;
 display:none;
-border-radius:10px;
 }
 </style>
 </head>
@@ -34,7 +26,7 @@ border-radius:10px;
 
 <h1>CPM Registry</h1>
 
-<input type="text" id="idInput" placeholder="CPM-P-001">
+<input id="idInput" placeholder="Enter ID">
 <button onclick="searchCard()">Search</button>
 
 <br><br>
@@ -49,22 +41,17 @@ const SHEET_URL =
 let players = {};
 
 fetch(SHEET_URL)
-.then(res => res.text())
+.then(r => r.text())
 .then(csv => {
 
-let rows = csv.split("\n");
+const rows = csv.trim().split("\n");
 
 for(let i=1;i<rows.length;i++){
 
-let cols = rows[i].split(",");
+const cols = rows[i].split(",");
 
 if(cols.length >= 2){
-
-let id = cols[0].trim();
-let img = cols[1].trim();
-
-players[id] = img;
-
+players[cols[0].trim()] = cols[1].trim();
 }
 
 }
@@ -73,18 +60,14 @@ players[id] = img;
 
 function searchCard(){
 
-let id = document.getElementById("idInput").value.trim();
-let img = document.getElementById("cardImage");
+const id = document.getElementById("idInput").value.trim();
+const img = document.getElementById("cardImage");
 
 if(players[id]){
-
 img.src = players[id];
 img.style.display = "block";
-
 }else{
-
 alert("Player Not Found");
-
 }
 
 }
