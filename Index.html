@@ -1,12 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CPM Registry</title>
+<style>
+body{
+background:#000;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:20px;
+}
+h1{
+font-size:50px;
+}
+input{
+padding:10px;
+font-size:20px;
+}
+button{
+padding:10px;
+font-size:20px;
+}
+img{
+max-width:90%;
+margin-top:20px;
+display:none;
+border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>CPM Registry</h1>
+
+<input type="text" id="idInput" placeholder="CPM-P-001">
+<button onclick="searchCard()">Search</button>
+
+<br><br>
+
+<img id="cardImage">
+
+<script>
+
+const SHEET_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vTEvagVZxVn8RG3ScLOlFfIssHJIe5lWwcKN3fFhT3Q_7T3Dj74Yr7zY27gmfonOsgBc2sr_p9z_2wV/pub?output=csv";
+
+let players = {};
+
+fetch(SHEET_URL)
+.then(res => res.text())
+.then(csv => {
+
+let rows = csv.split("\n");
+
+for(let i=1;i<rows.length;i++){
+
+let cols = rows[i].split(",");
+
+if(cols.length >= 2){
+
+let id = cols[0].trim();
+let img = cols[1].trim();
+
+players[id] = img;
+
+}
+
+}
+
+});
+
 function searchCard(){
 
 let id = document.getElementById("idInput").value.trim();
 let img = document.getElementById("cardImage");
 
-if(id=="CPM-P-001"){
+if(players[id]){
 
-img.src="CPM-P-001.png.jpg";
-img.style.display="block";
+img.src = players[id];
+img.style.display = "block";
 
 }else{
 
@@ -15,3 +88,8 @@ alert("Player Not Found");
 }
 
 }
+
+</script>
+
+</body>
+</html>
